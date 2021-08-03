@@ -1,0 +1,40 @@
+// STYLES-MAIN.SCSS
+// Variables
+@import "base/variables";
+@import "base/colors";
+
+//Helpers functions
+@import "base/functions";
+@import "base/mixins";
+
+// Reset
+@import "base/reset";
+
+// Vendors
+@import "vendors/slick";
+
+//Base
+@import "base/fonts";
+@import "base/icons";
+// @import "base/grid";
+// @import "base/extends";
+@import "base/typography";
+@import "base/btn";
+@import "base/form";
+@import "base/table";
+@import "base/helpers";
+
+// Grid
+//@import "vendors/grid/bootstrap-grid";
+@import "vendors/slick";
+// Components
+@import 'components/block-example';
+
+// Layouts
+@import "layouts/layout";
+@import "layouts/header";
+@import "layouts/footer";
+
+// Pages
+// @import 'pages/index';
+@import 'pages/carousel';

@@ -1,42 +1,40 @@
-import * as React from "react"
-import PropTypes from "prop-types"
-import { Link } from "gatsby"
+import React from "react"
+import { Link, useStaticQuery, graphql } from "gatsby"
+import parse from "html-react-parser"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
+const Header = ({ isHomePage, children }) => {
+  const {
+    wp: {
+      generalSettings: { title },
+    },
+  } = useStaticQuery(graphql`
+    query HeaderQuery {
+      wp {
+        generalSettings {
+          title
+          description
+        }
+      }
+    }
+  `)
+
+  return (
+    <div className="global-wrapper" data-is-root-path={isHomePage}>
+      <header className="global-header">
+      
+        {isHomePage ? (
+          <h1 className="main-heading">
+            <Link to="/">{parse(title)}</Link>
+          </h1>
+        ) : (
+          <Link className="header-link-home" to="/">
+            {title}
+          </Link>
+        )}
+      </header>
+
     </div>
-  </header>
-)
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
+  )
 }
 
 export default Header
